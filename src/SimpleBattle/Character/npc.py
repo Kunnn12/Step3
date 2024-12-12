@@ -77,28 +77,39 @@ class NPC(Character):
             If the NPC's characteristic is "rude", the output might be:
             "You think you can defeat me?"
         """
-        taunts = {
-            "gentle": [
-                "You fight bravely, but this is not your day.",
-                "A valiant effort, but you should surrender.",
-                "You have skill, but I must prevail.",
-                "Your heart is strong, but so is my blade.",
-                "This battle will end peacefully—for me.",
-            ],
-            "rude": [
-                "You think you can defeat me?",
-                "Prepare to lose!",
-                "Is that all you've got?",
-                "I'll crush you like an insect!",
-                "You're pathetic, even for a challenge!",
-            ],
-            "neutral": [
-                "Let us see who is stronger.",
-                "A good fight is what I live for!",
-                "This will be a battle to remember.",
-                "Strength meets strength today.",
-                "May the best fighter win!",
-            ],
-        }
-        characteristic_taunt = taunts.get(self.characteristic, taunts["neutral"])
-        return random.choice(characteristic_taunt)
+        try:
+            taunts = {
+                "gentle": [
+                    "You fight bravely, but this is not your day.",
+                    "A valiant effort, but you should surrender.",
+                    "You have skill, but I must prevail.",
+                    "Your heart is strong, but so is my blade.",
+                    "This battle will end peacefully—for me.",
+                ],
+                "rude": [
+                    "You think you can defeat me?",
+                    "Prepare to lose!",
+                    "Is that all you've got?",
+                    "I'll crush you like an insect!",
+                    "You're pathetic, even for a challenge!",
+                ],
+                "neutral": [
+                    "Let us see who is stronger.",
+                    "A good fight is what I live for!",
+                    "This will be a battle to remember.",
+                    "Strength meets strength today.",
+                    "May the best fighter win!",
+                ],
+            }
+            if self.characteristic not in taunts:
+                raise KeyError(f"Invalid characteristic: {self.characteristic}. Defaulting to 'neutral' taunts.")
+            
+            characteristic_taunt = taunts.get(self.characteristic, taunts["neutral"])
+            return random.choice(characteristic_taunt)
+        
+        except KeyError as e:
+            print(f"Error: {e}")
+            return random.choice(taunts["neutral"])  # Default to neutral taunts
+        except Exception as e:
+            print(f"An unexpected error occurred: {e}")
+            return random.choice(taunts["neutral"])  # Default to neutral taunts

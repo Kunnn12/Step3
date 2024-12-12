@@ -84,21 +84,25 @@ def get_player_action():
     Returns:
         str: The number corresponding to the player's chosen action.
     """
-    actions = {
-        "1": "Attack",
-        "2": "Skip Turn",
-    }
-    print("\nChoose your action:")
-    for key, action in actions.items():
-        print(f"{key}. {action}")
-    print(Style.RESET_ALL)
+    try:
+        actions = {
+            "1": "Attack",
+            "2": "Skip Turn",
+        }
+        print("\nChoose your action:")
+        for key, action in actions.items():
+            print(f"{key}. {action}")
+        print(Style.RESET_ALL)
 
-    while True:
-        action = input(Fore.LIGHTBLUE_EX + "Enter the number of your action: " + Style.RESET_ALL)
-        if action in actions:
-            return action
-        print(Fore.RED + "Invalid choice, try again." + Style.RESET_ALL)
+        while True:
+            action = input(Fore.LIGHTBLUE_EX + "Enter the number of your action: " + Style.RESET_ALL)
+            if action in actions:
+                return action
+            print(Fore.RED + "Invalid choice, try again." + Style.RESET_ALL)
 
+    except Exception as e:
+        print(f"An unexpected error occurred while getting player action: {e}")
+        return "2"  # Default to "Skip Turn" if something goes wrong
 
 # Result Display
 def display_last_message(result):
