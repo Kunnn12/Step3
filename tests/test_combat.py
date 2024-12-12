@@ -1,11 +1,14 @@
 import unittest
+# import sys
+# import os
+
+# sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import sys
 import os
-
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from Character.player import Player
-from Character.npc import NPC
-from Gameplay.combat import execute_player_turn, execute_npc_turn, start_combat
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
+from SimpleBattle.Character.player import Player
+from SimpleBattle.Character.npc import NPC
+from SimpleBattle.Gameplay.combat import execute_player_turn, execute_npc_turn, start_combat
 
 class TestCombat(unittest.TestCase):
     @classmethod

@@ -1,6 +1,6 @@
-from Character.player import Player
-from Character.npc import NPC
-from Gameplay.interface import (
+from SimpleBattle.Character.player import Player
+from SimpleBattle.Character.npc import NPC
+from SimpleBattle.Gameplay.interface import (
     display_combat_round, display_last_message, get_player_action
 )
 

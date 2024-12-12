@@ -1,4 +1,4 @@
-from Character.character import Character
+from SimpleBattle.Character.character import Character
 
 class Player(Character):
     """

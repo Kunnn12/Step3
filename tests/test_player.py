@@ -1,10 +1,13 @@
 import unittest
+# import sys
+# import os
+
+# sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import sys
 import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
-from Character.player import Player
+from SimpleBattle.Character.player import Player
 
 class TestPlayer(unittest.TestCase):
     @classmethod

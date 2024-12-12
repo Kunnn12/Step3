@@ -1,12 +1,15 @@
 import unittest
+# import sys
+# import os
+
+# sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import sys
 import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
-from Gameplay.interface import display_stats
-from Gameplay.interface import display_visual_health_bar
-from Character.player import Player
+from SimpleBattle.Gameplay.interface import display_stats
+from SimpleBattle.Gameplay.interface import display_visual_health_bar
+from SimpleBattle.Character.player import Player
 
 class TestInterface(unittest.TestCase):
     @classmethod
