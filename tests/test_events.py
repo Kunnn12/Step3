@@ -18,36 +18,43 @@ class TestEvents(unittest.TestCase):
             "Wandering Spirit", "Nimble Training", "Sharpen Focus"
         ]
 
-    @classmethod
-    def tearDownClass(cls):
-        pass
-
     def setUp(self):
         self.player = Player()
-        self.initial_hp = self.player.stats["HP"]
-        self.initial_items = len(self.player.items)
 
-    def tearDown(self):
-        del self.player
-
-    def test_generate_event(self):
+    @patch('random.choice', return_value="Find Healing Potion")
+    def test_generate_event(self, mock_choice):
         event = generate_event()
         self.assertIn(event, self.valid_events)
         self.assertIsInstance(event, str)
         self.assertGreater(len(event), 0)
         self.assertNotEqual(event, "")
+        mock_choice.assert_called_once()
 
-    def test_handle_event(self):
+    @patch('builtins.input', side_effect=["1", "yes"])
+    def test_handle_event(self, mock_input):
+        initial_hp = self.player.stats["HP"]
         handle_event(self.player)
-        final_hp = self.player.stats["HP"]
-        final_items = len(self.player.items)
-        self.assertTrue(final_hp != self.initial_hp or final_items != self.initial_items)
-        self.assertGreaterEqual(final_hp, 0)
+        self.assertNotEqual(self.player.stats["HP"], initial_hp)
+        self.assertGreaterEqual(self.player.stats["HP"], 0)
         self.assertIsInstance(self.player.items, list)
         self.assertGreaterEqual(len(self.player.items), 0)
+        mock_input.assert_called()
+
+    @patch('random.choice', return_value="Cursed Relic")
+    def test_generate_event_edge_case(self, mock_choice):
+        event = generate_event()
+        self.assertEqual(event, "Cursed Relic")
+        self.assertIn(event, self.valid_events)
+        mock_choice.assert_called_once()
+
+    @patch('builtins.input', side_effect=["no"])
+    def test_handle_event_no_action(self, mock_input):
+        initial_hp = self.player.stats["HP"]
+        handle_event(self.player)
+        self.assertEqual(self.player.stats["HP"], initial_hp)
+        self.assertIsInstance(self.player.items, list)
+        self.assertGreaterEqual(len(self.player.items), 0)
+        mock_input.assert_called()
 
 if __name__ == "__main__":
     unittest.main()
-
-
-
