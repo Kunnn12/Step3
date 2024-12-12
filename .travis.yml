@@ -1,3 +1,2 @@
 language: python
-script:
-   - ./tests/test_suite.py
+script: ./tests/test_suite.py
