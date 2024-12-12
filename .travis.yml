@@ -1,6 +1,3 @@
 language: python
- python:
-    - "3.4"
-    - "3.5"
- script:
-    - python test_suite.py
+script:
+   - ./tests/test_suite.py
