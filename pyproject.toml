@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "SimpleBattle"
+version = "0.0.1"
+authors = [
+  { name="Zefeng Pei", email="zefengpei@gmail.com" },
+  { name="Jiakun Li", email="jacob.jiakunli@gmail.com" }
+]
+description = "Simple Battle is a turn-based battle simulator where players engage in combat with NPC opponents. "
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://github.com/ZefengPei/533project_step3"
+Issues = "https://github.com/ZefengPei/533project_step3/issues"

@@ -11,7 +11,7 @@
 <header>
     <div class="content">
         <h1>Coverage report:
-            <span class="pc_cov">79%</span>
+            <span class="pc_cov">78%</span>
         </h1>
         <aside id="help_panel_wrapper">
             <input id="help_panel_state" type="checkbox">
@@ -26,6 +26,8 @@
                         <kbd>s</kbd>
                         <kbd>m</kbd>
                         <kbd>x</kbd>
+                        <kbd>b</kbd>
+                        <kbd>p</kbd>
                         <kbd>c</kbd>
                         &nbsp; change column sorting
                     </p>
@@ -43,7 +45,7 @@
         <form id="filter_container">
             <input id="filter" type="text" value="" placeholder="filter...">
             <div>
-                <input id="hide100" type="checkbox" >
+                <input id="hide100" type="checkbox" checked disabled >
                 <label for="hide100">hide covered</label>
             </div>
         </form>
@@ -54,7 +56,7 @@
         </h2>
         <p class="text">
             <a class="nav" href="https://coverage.readthedocs.io/en/7.6.8">coverage.py v7.6.8</a>,
-            created at 2024-12-11 21:54 -0800
+            created at 2024-12-11 23:16 -0800
         </p>
     </div>
 </header>
@@ -66,147 +68,130 @@
                 <th id="statements" aria-sort="none" data-default-sort-order="descending" data-shortcut="s">statements<span class="arrows"></span></th>
                 <th id="missing" aria-sort="none" data-default-sort-order="descending" data-shortcut="m">missing<span class="arrows"></span></th>
                 <th id="excluded" aria-sort="none" data-default-sort-order="descending" data-shortcut="x">excluded<span class="arrows"></span></th>
+                <th id="branches" aria-sort="none" data-default-sort-order="descending" data-shortcut="b">branches<span class="arrows"></span></th>
+                <th id="partial" aria-sort="none" data-default-sort-order="descending" data-shortcut="p">partial<span class="arrows"></span></th>
                 <th id="coverage" class="right" aria-sort="none" data-shortcut="c">coverage<span class="arrows"></span></th>
             </tr>
         </thead>
         <tbody>
             <tr class="region">
-                <td class="name left"><a href="z_2aa081e2711b3bab___init___py.html">src\SimpleBattle\Character\__init__.py</a></td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td class="right" data-ratio="0 0">100%</td>
-            </tr>
-            <tr class="region">
-                <td class="name left"><a href="z_2aa081e2711b3bab_character_py.html">src\SimpleBattle\Character\character.py</a></td>
-                <td>18</td>
-                <td>0</td>
-                <td>0</td>
-                <td class="right" data-ratio="18 18">100%</td>
-            </tr>
-            <tr class="region">
                 <td class="name left"><a href="z_2aa081e2711b3bab_npc_py.html">src\SimpleBattle\Character\npc.py</a></td>
                 <td>37</td>
                 <td>7</td>
                 <td>0</td>
-                <td class="right" data-ratio="30 37">81%</td>
+                <td>6</td>
+                <td>1</td>
+                <td class="right" data-ratio="35 43">81%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_2aa081e2711b3bab_player_py.html">src\SimpleBattle\Character\player.py</a></td>
-                <td>46</td>
-                <td>7</td>
+                <td>43</td>
+                <td>4</td>
                 <td>0</td>
-                <td class="right" data-ratio="39 46">85%</td>
-            </tr>
-            <tr class="region">
-                <td class="name left"><a href="z_f5b1a0ef0c31174c___init___py.html">src\SimpleBattle\Gameplay\__init__.py</a></td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td class="right" data-ratio="0 0">100%</td>
+                <td>10</td>
+                <td>1</td>
+                <td class="right" data-ratio="48 53">91%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_f5b1a0ef0c31174c_combat_py.html">src\SimpleBattle\Gameplay\combat.py</a></td>
                 <td>88</td>
-                <td>40</td>
+                <td>37</td>
                 <td>0</td>
-                <td class="right" data-ratio="48 88">55%</td>
+                <td>28</td>
+                <td>10</td>
+                <td class="right" data-ratio="67 116">58%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_f5b1a0ef0c31174c_events_py.html">src\SimpleBattle\Gameplay\events.py</a></td>
                 <td>66</td>
-                <td>46</td>
+                <td>40</td>
                 <td>0</td>
-                <td class="right" data-ratio="20 66">30%</td>
+                <td>34</td>
+                <td>6</td>
+                <td class="right" data-ratio="34 100">34%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_f5b1a0ef0c31174c_interface_py.html">src\SimpleBattle\Gameplay\interface.py</a></td>
                 <td>55</td>
                 <td>9</td>
                 <td>0</td>
-                <td class="right" data-ratio="46 55">84%</td>
-            </tr>
-            <tr class="region">
-                <td class="name left"><a href="z_0f1a95835f098a78___init___py.html">src\SimpleBattle\__init__.py</a></td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td class="right" data-ratio="0 0">100%</td>
-            </tr>
-            <tr class="region">
-                <td class="name left"><a href="z_a44f0ac069e85531_test_character_py.html">tests\test_character.py</a></td>
-                <td>60</td>
-                <td>0</td>
-                <td>0</td>
-                <td class="right" data-ratio="60 60">100%</td>
+                <td>8</td>
+                <td>1</td>
+                <td class="right" data-ratio="53 63">84%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_a44f0ac069e85531_test_combat_py.html">tests\test_combat.py</a></td>
                 <td>39</td>
                 <td>1</td>
                 <td>0</td>
-                <td class="right" data-ratio="38 39">97%</td>
+                <td>2</td>
+                <td>1</td>
+                <td class="right" data-ratio="39 41">95%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_a44f0ac069e85531_test_events_py.html">tests\test_events.py</a></td>
                 <td>35</td>
                 <td>1</td>
                 <td>0</td>
-                <td class="right" data-ratio="34 35">97%</td>
+                <td>2</td>
+                <td>1</td>
+                <td class="right" data-ratio="35 37">95%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_a44f0ac069e85531_test_interface_py.html">tests\test_interface.py</a></td>
                 <td>40</td>
                 <td>5</td>
                 <td>0</td>
-                <td class="right" data-ratio="35 40">88%</td>
+                <td>2</td>
+                <td>1</td>
+                <td class="right" data-ratio="36 42">86%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_a44f0ac069e85531_test_npc_py.html">tests\test_npc.py</a></td>
                 <td>51</td>
                 <td>7</td>
                 <td>0</td>
-                <td class="right" data-ratio="44 51">86%</td>
-            </tr>
-            <tr class="region">
-                <td class="name left"><a href="z_a44f0ac069e85531_test_player_py.html">tests\test_player.py</a></td>
-                <td>40</td>
-                <td>0</td>
-                <td>0</td>
-                <td class="right" data-ratio="40 40">100%</td>
+                <td>10</td>
+                <td>1</td>
+                <td class="right" data-ratio="53 61">87%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_a44f0ac069e85531_test_suite_py.html">tests\test_suite.py</a></td>
                 <td>22</td>
                 <td>0</td>
                 <td>0</td>
-                <td class="right" data-ratio="22 22">100%</td>
+                <td>2</td>
+                <td>1</td>
+                <td class="right" data-ratio="23 24">96%</td>
             </tr>
         </tbody>
         <tfoot>
             <tr class="total">
                 <td class="name left">Total</td>
-                <td>597</td>
-                <td>123</td>
+                <td>594</td>
+                <td>111</td>
                 <td>0</td>
-                <td class="right" data-ratio="474 597">79%</td>
+                <td>104</td>
+                <td>24</td>
+                <td class="right" data-ratio="541 698">78%</td>
             </tr>
         </tfoot>
     </table>
     <p id="no_rows">
         No items found using the specified filter.
     </p>
+        <p>6 files skipped due to complete coverage.</p>
 </main>
 <footer>
     <div class="content">
         <p>
             <a class="nav" href="https://coverage.readthedocs.io/en/7.6.8">coverage.py v7.6.8</a>,
-            created at 2024-12-11 21:54 -0800
+            created at 2024-12-11 23:16 -0800
         </p>
     </div>
     <aside class="hidden">
         <a id="prevFileLink" class="nav" href="z_a44f0ac069e85531_test_suite_py.html"></a>
-        <a id="nextFileLink" class="nav" href="z_2aa081e2711b3bab___init___py.html"></a>
+        <a id="nextFileLink" class="nav" href="z_2aa081e2711b3bab_npc_py.html"></a>
         <button type="button" class="button_prev_file" data-shortcut="["></button>
         <button type="button" class="button_next_file" data-shortcut="]"></button>
         <button type="button" class="button_show_hide_help" data-shortcut="?"></button>

@@ -108,6 +108,4 @@ class Player(Character):
         except InvalidAttackChoiceError as e:
             print(f"Error: {e}")
             return self.choose_attack("1")  # Recursively prompt for a valid attack choice
-        except Exception as e:
-            print(f"An unexpected error occurred: {e}")
-            return self.choose_attack("1")  # Default to Basic Attack
+        
