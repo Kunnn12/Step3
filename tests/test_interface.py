@@ -32,6 +32,43 @@ class TestInterface(unittest.TestCase):
             self.assertLessEqual(self.player.stats["HP"], 100)
             self.assertIsInstance(self.player.stats["HP"], int)
 
+        self.npc.stats["DODGE"] = 100  
+        with patch('builtins.input', side_effect=["1", "2", "3"]):
+            execute_player_turn(self.player, self.npc)
+            self.assertEqual(self.npc.stats["HP"], 40)  
+            self.assertIsInstance(self.npc.stats["HP"], int)
+
+    def test_execute_npc_turn_edge_cases(self):
+        self.player.stats["DODGE"] = 100  
+        execute_npc_turn(self.npc, self.player)
+        self.assertEqual(self.player.stats["HP"], 50)  
+        self.assertIsInstance(self.player.stats["HP"], int)  
+
+        self.player.stats["DODGE"] = 0  
+        execute_npc_turn(self.npc, self.player)
+        self.assertLess(self.player.stats["HP"], 50)  
+        self.assertGreaterEqual(self.player.stats["HP"], 0)  
+
+    def test_start_combat_full_scenario(self):
+        self.player.stats["HP"] = 10
+        self.npc.stats["HP"] = 5
+        with patch('builtins.input', side_effect=["1", "1"]): 
+            start_combat(self.player, self.npc)
+            self.assertGreaterEqual(self.player.stats["HP"], 0)  
+            self.assertEqual(self.npc.stats["HP"], 0)  
+            self.assertIsInstance(self.player.stats["HP"], int)
+            self.assertIsInstance(self.npc.stats["HP"], int)
+
+    def test_take_damage_additional_cases(self):
+        self.player.stats["HP"] = 50
+        self.player.take_damage(10)
+        self.assertEqual(self.player.stats["HP"], 40) 
+        self.player.take_damage(50)
+        self.assertEqual(self.player.stats["HP"], 0)  
+        self.player.take_damage(0)
+        self.assertEqual(self.player.stats["HP"], 0) 
+        self.assertIsInstance(self.player.stats["HP"], int)  
+
     def test_visual_health_bar_boundary(self):
         with patch('builtins.print') as mock_print:
             display_visual_health_bar(self.player.name, 0, 100)

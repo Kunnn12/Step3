@@ -147,14 +147,7 @@ def take_damage(self, damage):
     Modifies:
         self.stats["HP"]: Decrements the character's HP by the damage value.
     """
-    try:
-        if not isinstance(damage, (int, float)) or damage < 0:
-            raise ValueError("Damage must be a positive number.")
-        self.stats["HP"] -= damage
-        self.stats["HP"] = max(0, round(self.stats["HP"]))  # Round to the nearest integer and ensure non-negative
-    except ValueError as e:
-        print(f"Error: {e}")
-    except Exception as e:
-        print(f"An unexpected error occurred while applying damage: {e}")
+    self.stats["HP"] -= damage
+    self.stats["HP"] = max(0, round(self.stats["HP"]))  # Round to the nearest integer and ensure non-negative
 
 
