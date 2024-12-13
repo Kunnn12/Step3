@@ -1,10 +1,15 @@
 import unittest
+from unittest.mock import patch
+
+# import sys
+# import os
+
+# sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import sys
 import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
-from Character.npc import NPC
+from SimpleBattle.Character.npc import NPC
 
 class TestNPC(unittest.TestCase):
     @classmethod
@@ -52,13 +57,39 @@ class TestNPC(unittest.TestCase):
                 pass
 
     def test_taunt_player(self):
+        # Define the expected taunts based on the NPC's characteristic
+        expected_taunts = {
+            "gentle": [
+                "You fight bravely, but this is not your day.",
+                "A valiant effort, but you should surrender.",
+                "You have skill, but I must prevail.",
+                "Your heart is strong, but so is my blade.",
+                "This battle will end peacefully—for me.",
+            ],
+            "rude": [
+                "You think you can defeat me?",
+                "Prepare to lose!",
+                "Is that all you've got?",
+                "I'll crush you like an insect!",
+                "You're pathetic, even for a challenge!",
+            ],
+            "neutral": [
+                "Let us see who is stronger.",
+                "A good fight is what I live for!",
+                "This will be a battle to remember.",
+                "Strength meets strength today.",
+                "May the best fighter win!",
+            ],
+        }
+
+        # Call the taunt_player method
+        
         taunt = self.npc.taunt_player()
+        # Verify the taunt is a string and not empty
         self.assertIsInstance(taunt, str)
         self.assertGreater(len(taunt), 0)
-        # Check if the taunt contains expected phrases based on the NPC's characteristic
-        self.assertTrue(any(word in taunt for word in ["defeat", "crush", "challenge"]))  # Random words expected in the taunt
-        
-        # Ensure the taunt matches one of the example rude taunts (if characteristic is "rude")
-        self.assertTrue(taunt in ["You think you can defeat me?", "Prepare to lose!", "Is that all you've got?", 
-                                "I'll crush you like an insect!", "You're pathetic, even for a challenge!"])
+        self.assertLess(len(taunt), 50)
 
+        # Verify the taunt belongs to the correct characteristic group
+        characteristic_taunts = expected_taunts[self.npc.characteristic]
+        self.assertIn(taunt, characteristic_taunts)

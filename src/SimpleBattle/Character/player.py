@@ -1,4 +1,8 @@
-from Character.character import Character
+from SimpleBattle.Character.character import Character
+
+class InvalidAttackChoiceError(Exception):
+    """Custom exception for invalid attack choices."""
+    pass
 
 class Player(Character):
     """
@@ -63,38 +67,45 @@ class Player(Character):
                 "crit_chance_modifier": 0
             }
         """
-        attack_choice = ""
-        damage = 0
-        dodge_chance_modifier = 0
-        crit_chance_modifier = 0  # Modifier for the crit chance
-
-        player_input = player_input.strip().lower()
-
-        if player_input in ["1", "basic attack"]:
-            attack_choice = "Basic Attack"
-            damage = self.stats["ATK"]
+        try:
+            attack_choice = ""
+            damage = 0
             dodge_chance_modifier = 0
-            crit_chance_modifier = 0
-        elif player_input in ["2", "heavy strike"]:
-            attack_choice = "Heavy Strike"
-            damage = self.stats["ATK"] * 1.5
-            dodge_chance_modifier = 20  # Easier to dodge
-            crit_chance_modifier = 0
-        elif player_input in ["3", "quick attack"]:
-            attack_choice = "Quick Attack"
-            damage = self.stats["ATK"] * 0.7
-            dodge_chance_modifier = -20  # Harder to dodge
-            crit_chance_modifier = 15
-        else:
-            print("Invalid input, defaulting to Basic Attack.")
-            attack_choice = "Basic Attack"
-            damage = self.stats["ATK"]
-            dodge_chance_modifier = 0
-            crit_chance_modifier = 0
+            crit_chance_modifier = 0  # Modifier for the crit chance
 
-        return {
-            "attack_type": attack_choice,
-            "damage": damage,
-            "dodge_chance_modifier": dodge_chance_modifier,
-            "crit_chance_modifier": crit_chance_modifier
-        }
+            if not player_input:  # Handle None or empty input
+                raise InvalidAttackChoiceError("Input cannot be empty.")
+            player_input = player_input.strip().lower()
+
+            if player_input in ["1", "basic attack"]:
+                attack_choice = "Basic Attack"
+                damage = self.stats["ATK"]
+                dodge_chance_modifier = 0
+                crit_chance_modifier = 0
+            elif player_input in ["2", "heavy strike"]:
+                attack_choice = "Heavy Strike"
+                damage = self.stats["ATK"] * 1.5
+                dodge_chance_modifier = 20  # Easier to dodge
+                crit_chance_modifier = 0
+            elif player_input in ["3", "quick attack"]:
+                attack_choice = "Quick Attack"
+                damage = self.stats["ATK"] * 0.7
+                dodge_chance_modifier = -20  # Harder to dodge
+                crit_chance_modifier = 15
+            else:
+                print("Invalid input, defaulting to Basic Attack.")
+                attack_choice = "Basic Attack"
+                damage = self.stats["ATK"]
+                dodge_chance_modifier = 0
+                crit_chance_modifier = 0
+
+            return {
+                "attack_type": attack_choice,
+                "damage": damage,
+                "dodge_chance_modifier": dodge_chance_modifier,
+                "crit_chance_modifier": crit_chance_modifier
+            }
+        except InvalidAttackChoiceError as e:
+            print(f"Error: {e}")
+            return self.choose_attack("1")  # Recursively prompt for a valid attack choice
+        

@@ -1,10 +1,12 @@
 import unittest
+# import sys
+# import os
+
+# sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import sys
 import os
-
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
-from Character.character import Character
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
+from SimpleBattle.Character.character import Character
 class TestCharacter(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
