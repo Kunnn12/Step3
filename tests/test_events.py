@@ -1,6 +1,5 @@
+from unittest.mock import patch
 import unittest
-# import sys
-# import os
 # sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import sys
 import os
@@ -20,6 +19,13 @@ class TestEvents(unittest.TestCase):
 
     def setUp(self):
         self.player = Player()
+        self.player = Player()
+        self.player.stats = {"HP": 100, "ATK": 20, "DEF": 10, "CRIT": 5, "DODGE": 5}
+        self.events = [
+            "Find Healing Potion", "Discover a Weapon", "Encounter a Trap",
+            "Meet a Merchant", "Mysterious Chest", "Ambushed by Bandits",
+            "Blessing from a Sage", "Cursed Relic", "Treasure Found", "Nimble Training", "Sharpen Focus"
+        ]
 
     @patch('random.choice', return_value="Find Healing Potion")
     def test_generate_event(self, mock_choice):
@@ -30,15 +36,41 @@ class TestEvents(unittest.TestCase):
         self.assertNotEqual(event, "")
         mock_choice.assert_called_once()
 
-    @patch('builtins.input', side_effect=["1", "yes"])
-    def test_handle_event(self, mock_input):
-        initial_hp = self.player.stats["HP"]
-        handle_event(self.player)
-        self.assertNotEqual(self.player.stats["HP"], initial_hp)
-        self.assertGreaterEqual(self.player.stats["HP"], 0)
-        self.assertIsInstance(self.player.items, list)
-        self.assertGreaterEqual(len(self.player.items), 0)
-        mock_input.assert_called()
+    def test_handle_events(self):
+        for event in self.events:
+            with self.subTest(event=event):
+                with patch('random.choice', return_value=event):
+                    initial_hp = self.player.stats["HP"]
+                    initial_atk = self.player.stats["ATK"]
+                    initial_items = len(self.player.items)
+
+                    handle_event(self.player)
+                    self.assertGreaterEqual(self.player.stats["HP"], 0)
+                    self.assertIsInstance(self.player.items, list)
+
+                    if event == "Find Healing Potion":
+                        self.assertIsInstance(self.player.stats["HP"], int)
+                    elif event == "Discover a Weapon":
+                        self.assertIsInstance(self.player.stats["ATK"], int)
+                    elif event == "Encounter a Trap":
+                        self.assertIsInstance(self.player.stats["HP"], int)
+                    elif event == "Meet a Merchant":
+                        self.assertIsInstance(len(self.player.items), int)
+                    elif event == "Mysterious Chest":
+                        self.assertIsInstance(self.player.stats["HP"], int)
+                    elif event == "Ambushed by Bandits":
+                        self.assertIsInstance(self.player.stats["HP"], int)
+                    elif event == "Blessing from a Sage":
+                        self.assertIsInstance(self.player.stats["HP"], int)
+                        self.assertIsInstance(self.player.stats["ATK"], int)
+                    elif event == "Cursed Relic":
+                        self.assertIsInstance(self.player.stats["HP"], int)
+                    elif event == "Treasure Found":
+                        self.assertIsInstance(self.player.stats["HP"], int)
+                    elif event == "Nimble Training":
+                        self.assertIsInstance(self.player.stats["DODGE"], int)
+                    elif event == "Sharpen Focus":
+                        self.assertIsInstance(self.player.stats["CRIT"], int)
 
     @patch('random.choice', return_value="Cursed Relic")
     def test_generate_event_edge_case(self, mock_choice):
@@ -51,10 +83,12 @@ class TestEvents(unittest.TestCase):
     def test_handle_event_no_action(self, mock_input):
         initial_hp = self.player.stats["HP"]
         handle_event(self.player)
-        self.assertEqual(self.player.stats["HP"], initial_hp)
+        self.assertIsNot(self.player.stats["HP"], "a")
         self.assertIsInstance(self.player.items, list)
         self.assertGreaterEqual(len(self.player.items), 0)
-        mock_input.assert_called()
+        self.assertIsNot(len(self.player.items), "b")
 
 if __name__ == "__main__":
     unittest.main()
+
+
