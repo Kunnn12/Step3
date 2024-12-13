@@ -1,5 +1,6 @@
 # DATA533_Project
 # Simple Battle
+![Build passing](https://app.travis-ci.com/Kunnn12/Step3.svg?token=3ed7hFieSBKRrtV4Xkch&branch=main "Build passing")
 
 **Simple Battle** is a turn-based battle simulator where players engage in combat with NPC opponents. The game features dynamic events, random stat generation, and critical hit/dodge mechanics for an engaging experience. The project is structured into two sub-packages: **Character** and **Gameplay**, each focusing on specific game elements.
 
