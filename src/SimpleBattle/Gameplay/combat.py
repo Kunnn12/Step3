@@ -34,7 +34,6 @@ def execute_player_turn(player, npc):
                 player_attack = player.choose_attack(attack_choice)
             except ValueError as e:
                 print(e)
-                return
             print(f"{player.name} chooses {player_attack['attack_type']}!")
             if npc.dodge_attack(player_attack["dodge_chance_modifier"]):
                 print(f"{npc.name} dodges the attack!")
@@ -46,15 +45,11 @@ def execute_player_turn(player, npc):
                 npc.take_damage(damage)
                 print(f"{npc.name} takes {damage} damage. Remaining HP: {npc.stats['HP']}")
 
-        elif action == "2":  # Skip Turn
+        elif action == "2":  
             print(f"{player.name} skips the turn.")
 
     except InvalidActionError as e:
         print(f"Invalid action error: {e}")
-    except ValueError as e:
-        print(f"Error: {e}")
-    except Exception as e:
-        print(f"An unexpected error occurred during the player's turn: {e}")
         
 def execute_npc_turn(npc, player):
     """
@@ -71,7 +66,7 @@ def execute_npc_turn(npc, player):
         npc_attack = npc.choose_attack()
         if not npc_attack:  # Check if choose_attack returned None or invalid attack
             raise ValueError("NPC attack selection failed. No attack chosen.")
-    
+
         print(f"{npc.name} chooses {npc_attack['attack_type']}!")
         if player.dodge_attack(npc_attack["dodge_chance_modifier"]):
             print(f"{player.name} dodges the attack!")
@@ -82,10 +77,9 @@ def execute_npc_turn(npc, player):
                 print("Critical Hit!")
             player.take_damage(damage)
             print(f"{player.name} takes {damage} damage. Remaining HP: {player.stats['HP']}")
+
     except ValueError as e:
         print(f"Error during NPC's turn: {e}")
-    except Exception as e:
-        print(f"An unexpected error occurred during NPC's turn: {e}")
 
 def start_combat(player, npc):
     """
@@ -132,8 +126,6 @@ def start_combat(player, npc):
         
     except ValueError as e:
         print(f"Error during combat: {e}")
-    except Exception as e:
-        print(f"An unexpected error occurred during combat: {e}")
 
 def take_damage(self, damage):
     """
@@ -148,6 +140,6 @@ def take_damage(self, damage):
         self.stats["HP"]: Decrements the character's HP by the damage value.
     """
     self.stats["HP"] -= damage
-    self.stats["HP"] = max(0, round(self.stats["HP"]))  # Round to the nearest integer and ensure non-negative
+    self.stats["HP"] = max(0, round(self.stats["HP"])) 
 
 
