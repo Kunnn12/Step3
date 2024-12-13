@@ -1,5 +1,12 @@
 language: python
+
+# Define the Python versions you want to test
+python:
+  - "3.9"
+
+# Install dependencies
 install:
   - pip install -r requirements.txt
+  
 script: 
   - python tests/test_suite.py
