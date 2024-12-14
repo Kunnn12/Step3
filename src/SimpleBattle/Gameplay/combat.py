@@ -34,6 +34,8 @@ def execute_player_turn(player, npc):
                 player_attack = player.choose_attack(attack_choice)
             except ValueError as e:
                 print(e)
+                return
+            
             print(f"{player.name} chooses {player_attack['attack_type']}!")
             if npc.dodge_attack(player_attack["dodge_chance_modifier"]):
                 print(f"{npc.name} dodges the attack!")
@@ -50,6 +52,7 @@ def execute_player_turn(player, npc):
 
     except InvalidActionError as e:
         print(f"Invalid action error: {e}")
+        raise e
         
 def execute_npc_turn(npc, player):
     """
@@ -126,6 +129,7 @@ def start_combat(player, npc):
         
     except ValueError as e:
         print(f"Error during combat: {e}")
+        raise e
 
 def take_damage(self, damage):
     """

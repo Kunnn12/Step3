@@ -62,6 +62,11 @@ class TestInterface(unittest.TestCase):
         self.assertEqual(action, "1")
         self.assertIsInstance(action, str)
 
+    @patch('builtins.input', side_effect=Exception("Simulated Exception")) 
+    def test_get_player_action_exception(self, mock_input): 
+        action = get_player_action() 
+        self.assertEqual(action, "2")
+
     def test_execute_npc_turn_edge_cases(self):
         self.player.stats["DODGE"] = 100
         execute_npc_turn(self.npc, self.player)

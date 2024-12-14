@@ -1,13 +1,14 @@
 import unittest
-from unittest.mock import patch
+from unittest.mock import patch, MagicMock
 import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
 from SimpleBattle.Character.player import Player
 from SimpleBattle.Character.npc import NPC
 from SimpleBattle.Gameplay.combat import (
-    execute_player_turn, execute_npc_turn, start_combat, take_damage
+    execute_player_turn, execute_npc_turn, start_combat, take_damage, InvalidActionError
 )
+
 
 class TestCombat(unittest.TestCase):
     def setUp(self):
@@ -153,6 +154,58 @@ class TestCombat(unittest.TestCase):
         self.assertGreaterEqual(self.player.stats["HP"], 0)
         self.assertNotEqual(self.player.stats["HP"], -1)
         self.assertLessEqual(self.player.stats["HP"], 10)
+
+
+    @patch('SimpleBattle.Gameplay.combat.get_player_action', return_value="3")  # Simulate invalid action
+    def test_execute_player_turn_invalid_action(self, mock_get_player_action):
+        player_mock = MagicMock()
+        npc_mock = MagicMock()
+        with self.assertRaises(InvalidActionError):
+            execute_player_turn(player_mock, npc_mock)
+
+    @patch('SimpleBattle.Gameplay.combat.get_player_action', return_value="1")  # Simulate valid action
+    @patch('builtins.input', side_effect=["4"])  # Simulate invalid attack choice
+    def test_execute_player_turn_invalid_attack_choice(self, mock_input, mock_get_player_action):
+        player_mock = MagicMock()
+        npc_mock = MagicMock()
+        execute_player_turn(player_mock, npc_mock)
+        self.assertTrue(mock_input.called)
+        player_mock.choose_attack.assert_not_called()  # Ensure attack was not chosen
+
+
+    @patch('SimpleBattle.Gameplay.combat.execute_player_turn')
+    @patch('SimpleBattle.Gameplay.combat.execute_npc_turn')
+    @patch('SimpleBattle.Gameplay.combat.display_combat_round')
+    @patch('SimpleBattle.Gameplay.combat.display_last_message')
+    def test_start_combat_invalid_player_or_npc(self, mock_display_last_message, mock_display_combat_round, mock_execute_npc_turn, mock_execute_player_turn):
+        with self.assertRaises(ValueError):
+            start_combat(None, MagicMock())  # Invalid player
+        with self.assertRaises(ValueError):
+            start_combat(MagicMock(), None)  # Invalid NPC
+        with self.assertRaises(ValueError): 
+            start_combat(None, None)
+
+    @patch('SimpleBattle.Gameplay.combat.execute_player_turn')
+    @patch('SimpleBattle.Gameplay.combat.execute_npc_turn')
+    @patch('SimpleBattle.Gameplay.combat.display_combat_round')
+    @patch('SimpleBattle.Gameplay.combat.display_last_message')
+    def test_start_combat_valid_inputs(self, mock_display_last_message, mock_display_combat_round, mock_execute_npc_turn, mock_execute_player_turn):
+        player_mock = MagicMock()
+        npc_mock = MagicMock()
+        player_mock.stats = {"HP": 10}
+        npc_mock.stats = {"HP": 10}
+
+        def reduce_hp(*args, **kwargs):
+            npc_mock.stats["HP"] -= 5
+
+        mock_execute_player_turn.side_effect = reduce_hp
+
+        start_combat(player_mock, npc_mock)
+        self.assertTrue(mock_execute_player_turn.called)
+        self.assertTrue(mock_execute_npc_turn.called)
+        self.assertTrue(mock_display_combat_round.called)
+        self.assertTrue(mock_display_last_message.called)
+
 
 if __name__ == "__main__":
     unittest.main()
