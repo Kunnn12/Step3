@@ -1,3 +1,6 @@
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from Character.player import Player
 from Character.npc import NPC
 from Gameplay.combat import start_combat
@@ -5,6 +8,7 @@ from Gameplay.events import handle_event
 from Gameplay.interface import (
     display_ascii_art, display_stats, display_last_message, get_player_action
 )
+
 
 def main():
     """
