@@ -62,18 +62,16 @@ class TestEvents(unittest.TestCase):
         self.assertIsInstance(self.player.items, list)
         self.assertIn("DEF", self.player.stats)
 
-    @patch('random.choice', return_value="Mysterious Chest")
+    @patch('random.choice', return_value={"name": "Treasure", "effect": {"HP": 30, "ATK": 10, "CRIT": 5, "DODGE": 3}}) 
     @patch('builtins.input', return_value="yes")
     def test_mysterious_chest(self, mock_input, mock_random):
-        try:
-            initial_items = len(self.player.items)
-            handle_event(self.player)
-            self.assertGreater(len(self.player.items), -1)  
-            self.assertIsInstance(self.player.items, list)  
-            self.assertGreaterEqual(self.player.stats["HP"], -1)  
-            self.assertLessEqual(self.player.stats["HP"], 100000)  
-        except AttributeError as e:
-            pass
+        initial_items = len(self.player.items)
+        handle_event(self.player)
+        self.assertGreater(len(self.player.items), -1)  
+        self.assertIsInstance(self.player.items, list)  
+        self.assertGreaterEqual(self.player.stats["HP"], -1)  
+        self.assertLessEqual(self.player.stats["HP"], 100000)  
+
 
     @patch('random.choice', return_value="Ambushed by Bandits")
     def test_ambushed_by_bandits(self, mock_choice):

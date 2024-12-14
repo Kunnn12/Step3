@@ -100,5 +100,9 @@ class NPC(Character):
                 "May the best fighter win!",
             ],
         }
-        characteristic_taunt = taunts.get(self.characteristic, taunts["neutral"])
-        return random.choice(characteristic_taunt)
+        try: 
+            characteristic_taunt = taunts.get(self.characteristic, taunts["neutral"]) 
+            return random.choice(characteristic_taunt) 
+        except Exception as e: 
+            print(f"An error occurred: {e}")
+            return "An error occurred while taunting the player."

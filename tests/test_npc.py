@@ -93,3 +93,10 @@ class TestNPC(unittest.TestCase):
         # Verify the taunt belongs to the correct characteristic group
         characteristic_taunts = expected_taunts[self.npc.characteristic]
         self.assertIn(taunt, characteristic_taunts)
+
+    @patch('random.choice', side_effect=Exception("Mocked Exception")) 
+    def test_taunt_player_exception(self, mock_random_choice): 
+        # Call the taunt_player method and expect it to handle the exception 
+        self.npc.characteristic = "rude"
+        taunt = self.npc.taunt_player() 
+        self.assertEqual(taunt, "An error occurred while taunting the player.")
