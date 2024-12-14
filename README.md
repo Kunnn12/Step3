@@ -3,7 +3,9 @@
 
 ![Build passing](https://app.travis-ci.com/Kunnn12/Step3.svg?token=3ed7hFieSBKRrtV4Xkch&branch=main "Build passing")
 
-[**SimpleBattle 0.0.1 (PyPI Link**)](https://pypi.org/project/SimpleBattle/0.0.1/)
+[**SimpleBattle 0.0.2**)](https://pypi.org/project/SimpleBattle/0.0.2/)
+
+[**SimpleBattle 0.0.1**)](https://pypi.org/project/SimpleBattle/0.0.1/)
 
 **Simple Battle** is a turn-based battle simulator where players engage in combat with NPC opponents. The game features dynamic events, random stat generation, and critical hit/dodge mechanics for an engaging experience. The project is structured into two sub-packages: **Character** and **Gameplay**, each focusing on specific game elements.
 

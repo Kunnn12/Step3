@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: SimpleBattle
-Version: 0.0.1
+Version: 0.0.2
 Summary: Simple Battle is a turn-based battle simulator where players engage in combat with NPC opponents. 
 Author-email: Zefeng Pei <zefengpei@gmail.com>, Jiakun Li <jacob.jiakunli@gmail.com>
 Project-URL: Homepage, https://github.com/ZefengPei/533project_step3
@@ -14,7 +14,10 @@ License-File: LICENSE.txt
 
 # DATA533_Project
 # Simple Battle
+
 ![Build passing](https://app.travis-ci.com/Kunnn12/Step3.svg?token=3ed7hFieSBKRrtV4Xkch&branch=main "Build passing")
+
+[**SimpleBattle 0.0.1 (PyPI Link**)](https://pypi.org/project/SimpleBattle/0.0.1/)
 
 **Simple Battle** is a turn-based battle simulator where players engage in combat with NPC opponents. The game features dynamic events, random stat generation, and critical hit/dodge mechanics for an engaging experience. The project is structured into two sub-packages: **Character** and **Gameplay**, each focusing on specific game elements.
 
